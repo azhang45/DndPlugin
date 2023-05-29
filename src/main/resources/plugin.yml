@@ -1,0 +1,7 @@
+name: DndPlugin
+version: '${project.version}'
+main: me.azhang.dndplugin.DndPlugin
+api-version: 1.19
+authors: [Alztra]
+description: A plugin to that brings aspects of Dungeons & Dragons to Minecraft.
+website: https://alzhang.dev
