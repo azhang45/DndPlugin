@@ -5,3 +5,16 @@ api-version: 1.19
 authors: [Alztra]
 description: A plugin to that brings aspects of Dungeons & Dragons to Minecraft.
 website: https://alzhang.dev
+commands:
+  deactivate:
+    description: Deactivates all modes.
+    usage: /<command>
+    aliases: [deactive, deact]
+  combat:
+    description: Activates combat mode.
+    usage: /<command>
+    aliases: cmbt
+  mining:
+    description: Activates mining mode.
+    usage: /<command>
+    aliases: mine
