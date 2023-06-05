@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class ModeCommands implements CommandExecutor {
     // [combat, mine, other]
-    public boolean[] modeStatus = new boolean[3];
+    public static boolean[] modeStatus = new boolean[3];
     protected boolean modeActive = false;
 
 
