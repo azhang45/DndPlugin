@@ -62,13 +62,13 @@ public final class DndPlugin extends JavaPlugin implements Listener {
             //summon an iron sword with sharpness lvl equal to die roll - 5
             else if (ModeCommands.modeStatus[0]) {
                 ItemStack IronSword = new ItemStack(Material.IRON_SWORD);
-                IronSword.getItemMeta().addEnchant(Enchantment.DAMAGE_ALL, rollNum - 5, false);
+                IronSword.getItemMeta().addEnchant(Enchantment.DAMAGE_ALL, (rollNum - 5), false);
                 p.getWorld().dropItemNaturally(p.getLocation(), new ItemStack(IronSword));
 
                 //summon an iron pickaxe with efficiency lvl equal to die roll - 5
             } else if (ModeCommands.modeStatus[1]) {
                 ItemStack IronPickaxe = new ItemStack(Material.IRON_PICKAXE);
-                IronPickaxe.getItemMeta().addEnchant(Enchantment.DIG_SPEED, rollNum - 5, false);
+                IronPickaxe.getItemMeta().addEnchant(Enchantment.DIG_SPEED, (rollNum - 5), false);
                 p.getWorld().dropItemNaturally(p.getLocation(), new ItemStack(IronPickaxe));
             }
         }
