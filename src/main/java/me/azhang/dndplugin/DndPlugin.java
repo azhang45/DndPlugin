@@ -60,8 +60,9 @@ public final class DndPlugin extends JavaPlugin implements Listener {
 //                thrownPotion.setItem(HarmPotion);
 //            }
 
-            //summon an iron sword with sharpness lvl equal to die roll - 5
+            //summon an iron sword with sharpness lvl equal to die roll / 2
             if (ModeCommands.modeStatus[0]) {
+                removeDndItem(p);
                 ItemStack StoneSword = new ItemStack(Material.STONE_SWORD);
                 ItemMeta stoneSwordMeta = StoneSword.getItemMeta();
                 if(rollNum > 1){
@@ -71,8 +72,9 @@ public final class DndPlugin extends JavaPlugin implements Listener {
                 StoneSword.setItemMeta(stoneSwordMeta);
                 p.getWorld().dropItemNaturally(p.getLocation(), StoneSword);
 
-                //summon an iron pickaxe with efficiency lvl equal to die roll - 5
+                //summon an iron pickaxe with efficiency lvl equal to die roll / 3
             } else if (ModeCommands.modeStatus[1]) {
+                removeDndItem(p);
                 ItemStack IronPick = new ItemStack(Material.IRON_PICKAXE);
                 ItemMeta ironPickMeta = IronPick.getItemMeta();
                 if(rollNum > 2){
@@ -110,6 +112,19 @@ public final class DndPlugin extends JavaPlugin implements Listener {
             player.sendMessage("Rolled: " + rollNum);
         }
         isDice = false;
+    }
+
+    public static boolean removeDndItem(Player p){
+        ItemStack[] contents = p.getInventory().getContents();
+        boolean removed = false;
+        for(int i = 0; i < contents.length; i++){
+            if(contents[i] != null && contents[i].getItemMeta().getDisplayName().contains("D&D")){
+                p.getInventory().removeItem(contents[i]);
+                removed = true;
+            }
+        }
+
+        return removed;
     }
 
     @Override

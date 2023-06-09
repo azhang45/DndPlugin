@@ -1,5 +1,6 @@
 package me.azhang.dndplugin.commands;
 
+import me.azhang.dndplugin.DndPlugin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,11 +25,12 @@ public class ModeCommands implements CommandExecutor {
                 modeStatus[i] = false;
             }
             modeActive = false;
+            DndPlugin.removeDndItem(player);
             player.sendMessage("All modes have been deactivated.");
         }
         else if(cmd.getName().equalsIgnoreCase("combat")){
             if(modeActive){
-                player.sendMessage("A mode is already activated and you can only have one active mode at once. Deactive all modes with the command /mode deactive");
+                player.sendMessage("A mode is already activated and you can only have one active mode at once. Deactivate all modes with the command /deact");
             }
             else{
                 player.sendMessage("Combat mode activated.");
