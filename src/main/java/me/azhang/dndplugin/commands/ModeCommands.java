@@ -48,6 +48,9 @@ public class ModeCommands implements CommandExecutor {
                 modeActive = true;
             }
         }
+
+
+
         return true;
     }
 }

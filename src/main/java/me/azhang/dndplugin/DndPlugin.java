@@ -89,6 +89,30 @@ public final class DndPlugin extends JavaPlugin implements Listener {
         else if (eggName.equalsIgnoreCase("d10")){
             rollNum = (int) (Math.random() * 10) + 1;
             isDice = true;
+
+            if(p.getInventory().getItemInOffHand().getType().equals(Material.WOODEN_SWORD)){
+                throwPotion(rollNum, PotionEffectType.INCREASE_DAMAGE);
+            }
+
+            else if(p.getInventory().getItemInOffHand().getType().equals(Material.SLIME_BALL)){
+                throwPotion(rollNum, PotionEffectType.SPEED);
+            }
+
+            else if(p.getInventory().getItemInOffHand().getType().equals(Material.LEATHER_CHESTPLATE)){
+                throwPotion(rollNum, PotionEffectType.ABSORPTION);
+            }
+
+            else if(p.getInventory().getItemInOffHand().getType().equals(Material.SPYGLASS)){
+                throwPotion(rollNum, PotionEffectType.INVISIBILITY);
+            }
+
+            else if(p.getInventory().getItemInOffHand().getType().equals(Material.BOOK)){
+                throwPotion(rollNum, PotionEffectType.REGENERATION);
+            }
+
+            else if(p.getInventory().getItemInOffHand().getType().equals(Material.DIAMOND)){
+                throwPotion(rollNum, PotionEffectType.HERO_OF_THE_VILLAGE);
+            }
         }
         else if (eggName.equalsIgnoreCase("d8")){
             rollNum = (int) (Math.random() * 8) + 1;
@@ -125,6 +149,20 @@ public final class DndPlugin extends JavaPlugin implements Listener {
         }
 
         return removed;
+    }
+
+    public static void throwPotion(int rollNum, PotionEffectType effect){
+        if (rollNum == 1) {
+            ItemStack Potion = new ItemStack(Material.SPLASH_POTION);
+            PotionMeta potionMeta = (PotionMeta) Potion.getItemMeta();
+
+            potionMeta.addCustomEffect(new PotionEffect(effect, 20 * 5, rollNum), false);
+
+            Potion.setItemMeta(potionMeta);
+
+            ThrownPotion thrownPotion = (ThrownPotion) p.getWorld().spawnEntity(p.getLocation(), EntityType.SPLASH_POTION);
+            thrownPotion.setItem(Potion);
+        }
     }
 
     @Override
