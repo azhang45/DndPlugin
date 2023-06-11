@@ -91,27 +91,42 @@ public final class DndPlugin extends JavaPlugin implements Listener {
             isDice = true;
 
             if(p.getInventory().getItemInOffHand().getType().equals(Material.WOODEN_SWORD)){
-                throwPotion(rollNum, PotionEffectType.INCREASE_DAMAGE);
+                throwPotion(p, rollNum, PotionEffectType.INCREASE_DAMAGE);
+
             }
 
             else if(p.getInventory().getItemInOffHand().getType().equals(Material.SLIME_BALL)){
-                throwPotion(rollNum, PotionEffectType.SPEED);
+                throwPotion(p, rollNum, PotionEffectType.SPEED);
+
             }
 
             else if(p.getInventory().getItemInOffHand().getType().equals(Material.LEATHER_CHESTPLATE)){
-                throwPotion(rollNum, PotionEffectType.ABSORPTION);
+                if (rollNum > 1) {
+                    ItemStack Potion = new ItemStack(Material.SPLASH_POTION);
+                    PotionMeta potionMeta = (PotionMeta) Potion.getItemMeta();
+
+                    potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 20 * (rollNum * 10), rollNum / 3), true);
+
+                    Potion.setItemMeta(potionMeta);
+
+                    ThrownPotion thrownPotion = (ThrownPotion) p.getWorld().spawnEntity(p.getLocation(), EntityType.SPLASH_POTION);
+                    thrownPotion.setItem(Potion);
+                }
             }
 
             else if(p.getInventory().getItemInOffHand().getType().equals(Material.SPYGLASS)){
-                throwPotion(rollNum, PotionEffectType.INVISIBILITY);
+                throwPotion(p, rollNum, PotionEffectType.INVISIBILITY);
+
             }
 
             else if(p.getInventory().getItemInOffHand().getType().equals(Material.BOOK)){
-                throwPotion(rollNum, PotionEffectType.REGENERATION);
+                throwPotion(p, rollNum, PotionEffectType.REGENERATION);
+
             }
 
             else if(p.getInventory().getItemInOffHand().getType().equals(Material.DIAMOND)){
-                throwPotion(rollNum, PotionEffectType.HERO_OF_THE_VILLAGE);
+                throwPotion(p, rollNum * (rollNum * 50), PotionEffectType.HERO_OF_THE_VILLAGE);
+
             }
         }
         else if (eggName.equalsIgnoreCase("d8")){
@@ -151,12 +166,12 @@ public final class DndPlugin extends JavaPlugin implements Listener {
         return removed;
     }
 
-    public static void throwPotion(int rollNum, PotionEffectType effect){
-        if (rollNum == 1) {
+    public static void throwPotion(Player p, int rollNum, PotionEffectType effect){
+        if (rollNum > 1) {
             ItemStack Potion = new ItemStack(Material.SPLASH_POTION);
             PotionMeta potionMeta = (PotionMeta) Potion.getItemMeta();
 
-            potionMeta.addCustomEffect(new PotionEffect(effect, 20 * 5, rollNum), false);
+            potionMeta.addCustomEffect(new PotionEffect(effect, 20 * (rollNum * 10), rollNum), true);
 
             Potion.setItemMeta(potionMeta);
 
