@@ -89,18 +89,19 @@ public final class DndPlugin extends JavaPlugin implements Listener {
         else if (eggName.equalsIgnoreCase("d10")){
             rollNum = (int) (Math.random() * 10) + 1;
             isDice = true;
+            ItemStack offhandItem = p.getInventory().getItemInOffHand();
 
-            if(p.getInventory().getItemInOffHand().getType().equals(Material.WOODEN_SWORD)){
+            if(offhandItem.getType().equals(Material.WOODEN_SWORD) && offhandItem.getItemMeta().getDisplayName().equalsIgnoreCase("Strength")){
                 throwPotion(p, rollNum, PotionEffectType.INCREASE_DAMAGE);
 
             }
 
-            else if(p.getInventory().getItemInOffHand().getType().equals(Material.SLIME_BALL)){
+            else if(offhandItem.getType().equals(Material.FEATHER) && offhandItem.getItemMeta().getDisplayName().equalsIgnoreCase("Dexterity")){
                 throwPotion(p, rollNum, PotionEffectType.SPEED);
 
             }
 
-            else if(p.getInventory().getItemInOffHand().getType().equals(Material.LEATHER_CHESTPLATE)){
+            else if(offhandItem.getType().equals(Material.LEATHER_CHESTPLATE) && offhandItem.getItemMeta().getDisplayName().equalsIgnoreCase("Constitution")){
                 if (rollNum > 1) {
                     ItemStack Potion = new ItemStack(Material.SPLASH_POTION);
                     PotionMeta potionMeta = (PotionMeta) Potion.getItemMeta();
@@ -114,18 +115,19 @@ public final class DndPlugin extends JavaPlugin implements Listener {
                 }
             }
 
-            else if(p.getInventory().getItemInOffHand().getType().equals(Material.SPYGLASS)){
+            else if(offhandItem.getType().equals(Material.SPYGLASS) && offhandItem.getItemMeta().getDisplayName().equalsIgnoreCase("Intelligence")){
                 throwPotion(p, rollNum, PotionEffectType.INVISIBILITY);
 
             }
 
-            else if(p.getInventory().getItemInOffHand().getType().equals(Material.BOOK)){
-                throwPotion(p, rollNum, PotionEffectType.REGENERATION);
+            else if(offhandItem.getType().equals(Material.BOOK) && offhandItem.getItemMeta().getDisplayName().equalsIgnoreCase("Wisdom")){
+                throwPotion(p, rollNum * 40, PotionEffectType.LUCK);
+                throwPotion(p, rollNum * 40, PotionEffectType.NIGHT_VISION);
 
             }
 
-            else if(p.getInventory().getItemInOffHand().getType().equals(Material.DIAMOND)){
-                throwPotion(p, rollNum * (rollNum * 50), PotionEffectType.HERO_OF_THE_VILLAGE);
+            else if(offhandItem.getType().equals(Material.EMERALD) && offhandItem.getItemMeta().getDisplayName().equalsIgnoreCase("Charisma")){
+                throwPotion(p, rollNum * (rollNum * 20), PotionEffectType.HERO_OF_THE_VILLAGE);
 
             }
         }
