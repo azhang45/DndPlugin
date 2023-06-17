@@ -18,3 +18,6 @@ commands:
     description: Activates mining mode.
     usage: /<command>
     aliases: mine
+  skillbox:
+    description: Drops a shulker box with all the skill items.
+    usage: /<command>

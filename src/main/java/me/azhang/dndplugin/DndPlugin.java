@@ -30,6 +30,7 @@ public final class DndPlugin extends JavaPlugin implements Listener {
         getCommand("combat").setExecutor(cmds);
         getCommand("mining").setExecutor(cmds);
         getCommand("deactivate").setExecutor(cmds);
+        getCommand("skillbox").setExecutor(cmds);
     }
 
     @EventHandler
@@ -46,19 +47,6 @@ public final class DndPlugin extends JavaPlugin implements Listener {
         if (eggName.equalsIgnoreCase("d20")) {
             rollNum = (int) (Math.random() * 20) + 1;
             isDice = true;
-
-            //if rolled a 1, summon splash potion of harming
-//            if (rollNum == 1) {
-//                ItemStack HarmPotion = new ItemStack(Material.SPLASH_POTION);
-//                PotionMeta potionMeta = (PotionMeta) HarmPotion.getItemMeta();
-//
-//                potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.HARM, 20 * 5, 0), true);
-//
-//                HarmPotion.setItemMeta(potionMeta);
-//
-//                ThrownPotion thrownPotion = (ThrownPotion) p.getWorld().spawnEntity(p.getLocation(), EntityType.SPLASH_POTION);
-//                thrownPotion.setItem(HarmPotion);
-//            }
 
             //summon an iron sword with sharpness lvl equal to die roll / 2
             if (ModeCommands.modeStatus[0]) {
@@ -85,6 +73,10 @@ public final class DndPlugin extends JavaPlugin implements Listener {
                 IronPick.setItemMeta(ironPickMeta);
                 p.getWorld().dropItemNaturally(p.getLocation(), IronPick);
             }
+        }
+        else if (eggName.equalsIgnoreCase("d12")){
+            rollNum = (int) (Math.random() * 12) + 1;
+            isDice = true;
         }
         else if (eggName.equalsIgnoreCase("d10")){
             rollNum = (int) (Math.random() * 10) + 1;

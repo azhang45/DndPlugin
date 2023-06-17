@@ -1,10 +1,15 @@
 package me.azhang.dndplugin.commands;
 
 import me.azhang.dndplugin.DndPlugin;
+import me.azhang.dndplugin.SkillBox;
+import org.bukkit.Material;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
 
 public class ModeCommands implements CommandExecutor {
     // [combat, mine, other]
@@ -47,6 +52,9 @@ public class ModeCommands implements CommandExecutor {
                 modeStatus[1] = true;
                 modeActive = true;
             }
+        }
+        else if (cmd.getName().equalsIgnoreCase("skillbox")){
+            player.getWorld().dropItemNaturally(player.getLocation(), SkillBox.getSkillBox());
         }
 
 
