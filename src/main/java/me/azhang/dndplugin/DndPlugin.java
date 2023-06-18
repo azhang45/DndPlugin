@@ -2,15 +2,20 @@ package me.azhang.dndplugin;
 
 import me.azhang.dndplugin.commands.ModeCommands;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.data.type.Fire;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerEggThrowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import org.bukkit.inventory.ItemStack;
@@ -36,6 +41,17 @@ public final class DndPlugin extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
         event.setJoinMessage("Welcome to the world, " + event.getPlayer().getDisplayName() + ".");
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event){
+        Player p = event.getPlayer();
+        if(event.getAction() == Action.LEFT_CLICK_AIR){
+            if(event.getItem().getItemMeta().getDisplayName().equals("Staff of Fireball")){
+
+                FireStaff.shoot(p);
+            }
+        }
     }
 
     @EventHandler
@@ -126,6 +142,10 @@ public final class DndPlugin extends JavaPlugin implements Listener {
         else if (eggName.equalsIgnoreCase("d8")){
             rollNum = (int) (Math.random() * 8) + 1;
             isDice = true;
+
+            if (rollNum > 1){
+                FireStaff.giveStaff(rollNum, p);
+            }
         }
         else if (eggName.equalsIgnoreCase("d6")){
             rollNum = (int) (Math.random() * 6) + 1;
